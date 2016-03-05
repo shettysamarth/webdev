@@ -1,0 +1,56 @@
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="main col-md-offset-2 col-md-8 col-sm-offset-3">
+            <h1 class="page-header">Forms</h1>
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#">Forms</a></li>
+                <li role="presentation"><a href="form-fields.html">Fields</a></li>
+            </ul>
+            <div class="table-responsive sub-main bordered">
+                <table class="table table-striped">
+                    <tr>
+                        <th class="col-md-4"><span class="glyphicon glyphicon-triangle-bottom"></span>Form Name</th>
+
+                        <th class="col-md-2"><span class="glyphicon glyphicon-triangle-bottom"></span>Action</th>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input ng-model="form.name" type="text" class="form-control" id="inputFormName" placeholder="name">
+                        </td>
+                        <td>
+                            <div class="btn-toolbar">
+                                <button ng-click="updateForm(form)" type="button" class="btn btn-success btn pull-right">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                </button>
+                                <button ng-click="addForm(form)" type="button" class="btn btn-primary btn pull-right" >
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr ng-repeat="form in forms">
+                        <td> {{form.name}}</td>
+                        <td>
+                            <div class="btn-toolbar">
+                                <button ng-click = "selectForm($index)" type="button" class="btn btn-info btn pull-right">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                                <button ng-click = "deleteForm($index)" type="button" class="btn btn-danger btn pull-right" >
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
