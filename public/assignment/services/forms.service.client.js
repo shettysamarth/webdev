@@ -52,33 +52,34 @@
 
         function deleteFormById(formId, callback) {
 
-            for(var index=0; index<forms.length; index++)
-            {
-                if(JSON.stringify(forms[index]._id) === JSON.stringify(formId))
-                {
+            for(var index=0; index<forms.length; index++) {
+                console.log(JSON.stringify(forms[index]._id) + " " + JSON.stringify(formId));
+                if (JSON.stringify(forms[index]._id) === JSON.stringify(formId)) {
+
                     console.log("deleting")
                     forms.splice(index, 1);
                 }
-                var userForms = [];
-                for(var index=0; index<forms.length; index++)
-                {
-                    if(forms[index].userId === $rootScope.user._id)
-                    {
-                        userForms.push(forms[index]);
-                    }
-
-                }
-                callback(userForms);
             }
+            var userForms = [];
+            for(var index=0; index<forms.length; index++)
+            {
+                if(forms[index].userId === $rootScope.user._id)
+                {
+                    userForms.push(forms[index]);
+                }
+
+            }
+            callback(userForms);
+
         }
 
         function  updateFormById(formId, newForm, callback) {
             for(var index=0; index<forms.length; index++)
             {
-                if(forms[index]._id === userId)
+                if(forms[index]._id === formId)
                 {
-                    forms[index] = newForm;
-                    callback(newForm);
+                    forms[index].name = newForm.name;
+                    callback(forms[index]);
                     return;
                 }
                 callback(null);

@@ -35,7 +35,7 @@
 
         function updateForm(form) {
             console.log(form);
-            FormService.updateFormById(form._id, form, updateFormCallBack)
+            FormService.updateFormById($scope.selectedForm._id, form, updateFormCallBack)
         }
 
         function updateFormCallBack(form)
@@ -54,8 +54,10 @@
 
         }
 
-        function selectForm(index) {
+        function selectForm(index, form) {
+
             $scope.selectedForm = $scope.forms[index];
+            $scope.form = {name: $scope.selectedForm.name};
             console.log("selected");
             console.log($scope.forms[index]);
 
