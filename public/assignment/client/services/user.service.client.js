@@ -41,7 +41,7 @@
         function  createUser(user){
             var deferred = $q.defer();
             $http
-                .post("/api/assignment/user", newUser)
+                .post("/api/assignment/user", user)
                 .success(function (response) {
                     deferred.resolve(response);
                 });

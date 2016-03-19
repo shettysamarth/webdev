@@ -10,7 +10,7 @@
 
         function register(user) {
             console.log("registerClicked");
-            UserService.createUser(user, serviceCallBack);
+            UserService.createUser(user).then(serviceCallBack);
         }
 
         function serviceCallBack(user){

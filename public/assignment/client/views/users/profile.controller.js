@@ -17,11 +17,12 @@
         function update(user)
         {
             console.log("update");
-            UserService.updateUser($rootScope.user["_id"], user, updateCallback);
+            UserService.updateUser($rootScope.user["_id"], user).then(updateCallback);
         }
 
         function updateCallback(user)
         {
+            console.log(user);
             if(user)
             {
                 $rootScope.user = user;

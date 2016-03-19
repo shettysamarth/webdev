@@ -10,7 +10,7 @@ module.exports = function (app, model) {
 
     function createUser (req, res) {
         var newuser = req.body;
-        res.json(model.createUser(newuser));
+        res.json(model.addNewUser(newuser));
     }
 
     function findAllUsers (req, res) {

@@ -64,26 +64,31 @@ module.exports = function(app) {
 
     function addNewUser(newUser) {
         var user = {
-            id : uuid.v1(),
-            username : newuser.username,
-            password : newuser.password,
-            email : newuser.email,
-            firstName : newuser.firstName,
-            lastName : newuser.lastName
+            _id : uuid.v1(),
+            username : newUser.username,
+            password : newUser.password,
+            email : newUser.email,
+            firstName : newUser.firstName,
+            lastName : newUser.lastName
         };
         users.push(user);
-        return users;
+        return user;
     }
 
     function updateUser(userId, userObj) {
         for(var i = 0; i < users.length; i++) {
-            if(users[i].id === userId) {
+            console.log(users[i]["_id"] + userId );
+
+            if(users[i]["_id"] == userId) {
+                console.log("updating user");
                 for(var attr in userObj) {
-                    if(userObj.hasOwnProperty(attr))
+
                         users[i][attr] = userObj[attr];
                 }
-                break;
+                //console.log(users[i]);
+                return users[i];
             }
         }
+
     }
 };
