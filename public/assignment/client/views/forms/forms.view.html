@@ -19,7 +19,7 @@
 
                     <tr>
                         <td>
-                            <input ng-model="form.name" type="text" class="form-control" id="inputFormName" placeholder="name">
+                            <input ng-model="form.title" type="text" class="form-control" id="inputFormName" placeholder="name">
                         </td>
                         <td>
                             <div class="btn-toolbar">
@@ -34,7 +34,7 @@
                     </tr>
 
                     <tr ng-repeat="form in forms">
-                        <td> {{form.name}}</td>
+                        <td> {{form.title}}</td>
                         <td>
                             <div class="btn-toolbar">
                                 <button ng-click = "selectForm($index, form)" type="button" class="btn btn-info btn pull-right">

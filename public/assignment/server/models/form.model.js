@@ -1,5 +1,6 @@
 "use strict";
 var forms = require("./form.mock.json");
+var uuid = require('node-uuid');
 
 module.exports = function (app) {
     var api = {
@@ -15,13 +16,14 @@ module.exports = function (app) {
         findFieldByFieldAndFormId : findFieldByFieldAndFormId,
         deleteFieldByFieldAndFormId : deleteFieldByFieldAndFormId,
         createNewFieldForFormId : createNewFieldForFormId,
-        updateFieldByFieldAndFormId : updateFieldByFieldAndFormId
+        updateFieldByFieldAndFormId : updateFieldByFieldAndFormId,
     };
     return api;
 
 
 
     function createForm (newform) {
+        console.log(newform);
         var form = {
             id :  uuid.v1(),
             title : newform.title,
@@ -48,11 +50,14 @@ module.exports = function (app) {
     }
 
     function updateForm (id, updatedForm) {
+
+        console.log(id + updatedForm);
+
         for (var i = forms.length - 1; i >= 0; i--) {
             if (forms[i].id === id) {
-                for(var attr in newForm) {
+                for(var attr in updatedForm) {
                     //if(userObj.hasOwnProperty(attr))
-                    forms[i][attr] = newForm[attr];
+                    forms[i][attr] = updatedForm[attr];
                 }
                 break;
             }
@@ -67,6 +72,7 @@ module.exports = function (app) {
                 break;
             }
         }
+        console.log(forms);
         return forms;
     }
 
@@ -88,17 +94,26 @@ module.exports = function (app) {
                 formsForUser.push(forms[i]);
             }
         }
+        console.log(formsForUser);
         return formsForUser;
     }
 
-    function createFormForUserId (userId, newform) {
+    function createFormForUserId (userId, newForm) {
+        console.log(newForm);
+        console.log(userId);
         var form = {
-            id : newform.id,
-            title : newform.title,
+            id : uuid.v1(),
+            title : newForm.title,
             userId : userId,
-            fields : newform.fields
+            fields : newForm.fields
         }
-        forms.push(user);
+        forms.push(form);
+        return findAllFormsForUserId(userId);
+    }
+
+    function  deleteFormForUserId(userId, formId)
+    {
+        deleteForm(formId);
         return findAllFormsForUserId(userId);
     }
 
