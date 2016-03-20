@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="main table-responsive col-md-offset-2 col-md-8 col-sm-8 col-sm-offset-3">
+            <h1 class="page-header">Fields</h1>
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="#/forms">Forms</a></li>
+                <li role="presentation"class="active"><a href="#/fields">Fields</a></li>
+            </ul>
+
+                <ul ui-sortable = "sortableFields" ng-model="model.fields" >
+
+                <li  ng-repeat="field in model.fields">
+                    <div class="row">
+
+
+                    <div class="col-sm-6 col-md-6 form-group" ng-switch on="field.type">
+                        <!-- For text and date fields-->
+                        <div ng-switch-default>
+
+                            <label for="{{field._id}}">{{field.label}}</label>
+                            <input type="{{field.type}}" class="form-control"
+                                   placeholder="{{field.placeholder}}"
+                                   id="{{field._id}}"/>
+                        </div>
+
+                        <div ng-switch-when="TEXTAREA">
+
+                            <label for="{{field._id}}">{{field.label}}</label>
+                <textarea class="form-control"
+                          placeholder="{{field.placeholder}}"
+                          id="{{field._id}}" rows="3"/>
+
+                        </div>
+
+                        <!--For dropdown fields-->
+                        <div ng-switch-when="OPTIONS">
+                            <label for="{{field._id}}">{{field.label}}</label>
+                            <select name="{{field.label}}" id="{{field._id}}" class="form-control">
+
+                                <option ng-repeat = "option in field.options"
+                                        value="{{option.value}}">{{option.label}}</option>
+                            </select>
+                        </div>
+
+                        <!--For Checkbox-->
+                        <div ng-switch-when="CHECKBOXES">
+                            <label for="{{field._id}}">{{field.label}}</label>
+                            <div ng-repeat = "option in field.options">
+                                <input type="checkbox"
+                                       name="{{field.label}}"
+                                       value="{{option.value}}">
+                                {{option.label}}
+                                <br>
+                            </div>
+                        </div>
+
+                        <!--For radio buttons-->
+                        <div ng-switch-when="RADIOS">
+                            <label for="{{field._id}}">{{field.label}}</label>
+                            <div ng-repeat = "option in field.options">
+                                <input
+                                        type="radio"
+                                        name="{{field.label}}"
+                                        value="{{option.value}}">
+                                {{option.label}}
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action-column col-sm-3">
+                        <span class="glyphicon glyphicon-pencil hover btn btn-info  btn1 pull-right" ng-click="model.editField($index)"></span>
+                        <span class="glyphicon glyphicon-remove hover btn btn-danger  btn1 pull-right" ng-click="model.deleteField($index)"></span>
+                        <span class="glyphicon glyphicon-align-justify hover btn btn-primary  btn1 pull-right"></span>
+                    </div>
+                    </div>
+                </li>
+            </ul>
+
+            <form>
+                <div class="row action-column">
+                    <div class="form-group col-sm-6">
+
+                        <label>Add new field:</label>
+
+                        <select name="new-field" id="new-field" class="form-control"  ng-model="model.fieldType"
+                                ng-options="option.name for option in model.options track by option.value"
+                                ng-init="model.options[0]">
+
+                            <option value="{{option.value}}">{{option.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="glyphicon glyphicon-plus hover btn btn-success btn1 pull-right" ng-click="model.createNewField()"></span>
+                    </div>
+                </div>
+            </form>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
