@@ -46,7 +46,7 @@
         }
 
         function deleteForm(index) {
-            console.log($scope.forms[index]["id"]);
+            //console.log($scope.forms[index]["id"]);
             FormService.deleteFormById($scope.forms[index]["id"]).then(deleteFormCallBack);
         }
 

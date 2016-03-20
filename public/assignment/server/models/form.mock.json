@@ -3,7 +3,7 @@
     "fields": [
       {"id": "111", "label": "First Name", "type": "TEXT", "placeholder": "First Name"},
       {"id": "222", "label": "Last Name", "type": "TEXT", "placeholder": "Last Name"},
-      {"id": "333", "label": "Address", "type": "TEXT", "placeholder": "Address"},
+      {"id": "333", "label": "Address", "type": "TEXTAREA", "placeholder": "Address"},
       {"id": "444", "label": "State", "type": "OPTIONS", "options": [
         {"label": "Massachussets", "value": "MA"},
         {"label": "New Hampshire", "value": "NH"}]},

@@ -5,6 +5,8 @@ module.exports = function(app, model) {
     app.get("/api/assignment/form/:formId/field/:fieldId", findFieldByFieldAndFormId);
     app.post("/api/assignment/form/:formId/field", createNewFieldForFormId);
     app.put("/api/assignment/form/:formId/field/:fieldId", updateFieldByFieldAndFormId);
+    app.put("/api/assignment/fieldform/:formId", updateAllFieldsOfFormId);
+
 
     function findAllFieldsForFormId (req, res) {
         var formId = req.params.formId;
@@ -35,5 +37,12 @@ module.exports = function(app, model) {
         var fieldId = req.params.fieldId;
         var updatedField = req.body;
         res.json(model.updateFieldByFieldAndFormId(formId, fieldId, updatedField));
+    }
+
+    function updateAllFieldsOfFormId(req, res) {
+        console.log("received updateAllFieldsOfFormId")
+        var formId = req.params.formId;
+        var fields = req.body;
+        res.json(model.updateAllFieldsOfFormId(formId,fields));
     }
 };

@@ -17,6 +17,7 @@ module.exports = function (app) {
         deleteFieldByFieldAndFormId : deleteFieldByFieldAndFormId,
         createNewFieldForFormId : createNewFieldForFormId,
         updateFieldByFieldAndFormId : updateFieldByFieldAndFormId,
+        updateAllFieldsOfFormId: updateAllFieldsOfFormId
     };
     return api;
 
@@ -65,6 +66,17 @@ module.exports = function (app) {
     return forms;
     }
 
+    function  updateAllFieldsOfFormId(formId, fields){
+        //console.log("Updating all fields");
+        for (var i = 0; i < forms.length; i++) {
+            if (forms[i].id == formId) {
+                forms[i].fields = fields;
+                break;
+            }
+        }
+        return 200;
+
+    }
     function deleteForm (id) {
         for (var index = 0; index < forms.length; index++) {
             if (forms[index].id == id) {
@@ -147,7 +159,8 @@ module.exports = function (app) {
                 var fields = forms[i].fields;
                 for (var j = 0; j < fields.length; j++) {
                     if (fields[j].id == fieldId) {
-                        forms[i].fields[j].splice(j, 1);
+
+                        fields.splice(j, 1);
                         break;
                     }
                 }
@@ -159,11 +172,21 @@ module.exports = function (app) {
     function createNewFieldForFormId (formId, newField) {
         for (var i = 0; i < forms.length; i++) {
             if (forms[i].id == formId) {
-                forms[i].fields.push(newField);
+                console.log("mf1");
+
+                if(forms[i].fields != undefined ) {
+                    console.log("mf");
+                    forms[i].fields.push(newField);
+                }
+                else {
+                    console.log("else")
+                    forms[i].fields = [];
+                    forms[i].fields.push(newField);
+                }
                 break;
             }
         }
-        return forms[i];
+        return forms[i].fields;
     }
 
     function updateFieldByFieldAndFormId (formId, fieldId, updatedField) {
