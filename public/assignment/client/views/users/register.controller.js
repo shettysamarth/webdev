@@ -10,12 +10,14 @@
 
         function register(user) {
             console.log("registerClicked");
+            user.emails = [user.email];
             UserService.createUser(user).then(serviceCallBack);
         }
 
         function serviceCallBack(user){
             if(user)
             {
+                console.log("ser" + user);
                 $rootScope.user = user;
                 $scope.$location.path("/profile");
                 console.log("user Created :");

@@ -10,39 +10,56 @@ module.exports = function(app, model) {
 
     function findAllFieldsForFormId (req, res) {
         var formId = req.params.formId;
-        res.json(model.findAllFieldsForFormId(formId));
+        model.findAllFieldsForFormId(formId)
+            .then(function(fields){
+                res.json(fields);
+            });
     }
 
     function findFieldByFieldAndFormId (req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        res.json(model.findFieldByFieldAndFormId(formId, fieldId));
+        model.findFieldByFieldAndFormId(formId, fieldId).then(function(field){
+            res.json(field);
+        });
     }
 
     function deleteFieldByFieldAndFormId (req, res) {
         console.log("delete from server field service");
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        res.json(model.deleteFieldByFieldAndFormId(formId, fieldId));
+        model.deleteFieldByFieldAndFormId(formId, fieldId)
+            .then(function(res){
+                res.json(res);
+        });
     }
 
     function createNewFieldForFormId (req, res) {
         var formId = req.params.formId;
         var newField = req.body;
-        res.json(model.createNewFieldForFormId(formId, newField));
+        model.createNewFieldForFormId(formId, newField)
+            .then(function(res){
+                res.json(res);
+        });
     }
 
     function updateFieldByFieldAndFormId (req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         var updatedField = req.body;
-        res.json(model.updateFieldByFieldAndFormId(formId, fieldId, updatedField));
+        model.updateFieldByFieldAndFormId(formId, fieldId, updatedField)
+            .then(function(res){
+                res.json(res);
+        });
     }
 
     function updateAllFieldsOfFormId(req, res) {
         console.log("received updateAllFieldsOfFormId")
         var formId = req.params.formId;
         var fields = req.body;
-        res.json(model.updateAllFieldsOfFormId(formId,fields));
+        model.updateAllFieldsOfFormId(formId,fields)
+            .then(function(res){
+                res.json(res);
+            });
     }
 };

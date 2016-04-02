@@ -22,7 +22,8 @@
         function addForm(form) {
             console.log(form);
 
-            FormService.createFormForUser($rootScope.user._id, form).then (createFormCallBack);
+            FormService.createFormForUser($rootScope.user._id, form)
+                .then (createFormCallBack);
         }
 
         function createFormCallBack(form) {
@@ -37,7 +38,8 @@
 
         function updateForm(form) {
             console.log(form);
-            FormService.updateFormById($scope.selectedForm.id, form).then (updateFormCallBack)
+            $scope.selectedForm.title = form.title;
+            FormService.updateFormById($scope.selectedForm._id, $scope.selectedForm).then (updateFormCallBack)
         }
 
         function updateFormCallBack(form)
@@ -47,7 +49,7 @@
 
         function deleteForm(index) {
             //console.log($scope.forms[index]["id"]);
-            FormService.deleteFormById($scope.forms[index]["id"]).then(deleteFormCallBack);
+            FormService.deleteFormById($scope.forms[index]["_id"]).then(deleteFormCallBack);
         }
 
         function deleteFormCallBack(forms) {
@@ -57,6 +59,7 @@
         function selectForm(index, form) {
 
             $scope.selectedForm = $scope.forms[index];
+            console.log($scope.selectedForm);
             $scope.form = {title: $scope.selectedForm.title};
             console.log("selected");
             console.log($scope.forms[index]);

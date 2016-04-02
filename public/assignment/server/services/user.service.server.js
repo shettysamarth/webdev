@@ -10,21 +10,33 @@ module.exports = function (app, model) {
 
     function createUser (req, res) {
         var newuser = req.body;
-        res.json(model.addNewUser(newuser));
+        model.addNewUser(newuser)
+            .then(function (user) {
+                res.json(user);
+            });
     }
 
     function findAllUsers (req, res) {
-        res.json(model.findAllUsers());
+        model.findAllUsers()
+            .then(function (users) {
+                res.json(users);
+            });
     }
 
     function findUserById (req, res) {
         var id = req.params.userId;
-        res.json(model.findUserById(id));
+        model.findUserById(id)
+            .then(function (user) {
+                res.json(user);
+            });
     }
 
     function findUserByUsername (req, res) {
         var username = req.params.username;
-        res.json(model.findUserByUsername(username));
+        model.findUserByUsername(username)
+            .then(function (user) {
+                res.json(user);
+            });
     }
 
     function findUserByUsernameAndPassword (req, res) {
@@ -32,17 +44,28 @@ module.exports = function (app, model) {
             "username" : req.params.username,
             "password" : req.params.password
         };
-        res.json(model.findUserByCredentials(credentials));
+        model.findUserByCredentials(credentials)
+            .then (function (user) {
+                res.json(user);
+            });
     }
 
     function updateUser (req, res) {
         var id = req.params.userId;
         var updatedUser = req.body;
-        res.json(model.updateUser(id, updatedUser));
+        model.updateUser(id, updatedUser)
+            .then(function(user){
+                res.json(user);
+            });
     }
 
     function deleteUser (req, res) {
         var id = req.params.userId;
-        res.json(model.deleteUser(id));
+
+        model.deleteUser(id)
+            .then (function(success)
+            {
+                res.json(success);
+            });
     }
 };

@@ -51,6 +51,8 @@
 
         function  updateFormById(formId, newForm) {
             var deferred = $q.defer();
+
+            console.log(formId);
             $http
                 .put("/api/assignment/form/" + formId, newForm)
                 .success(function (response) {
