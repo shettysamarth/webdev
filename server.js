@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var cookieParser=require('cookie-parser');
 var session=require('express-session');
 
-var secretKey=process.env.SESSION_SECRET;
+var secretKey=process.env.SESSION_SECRET || "qwerty1234";
 app.use(session({resave: true,
     saveUninitialized: true,
     secret: secretKey}));
@@ -43,5 +43,5 @@ app.listen(port, ipaddress);
 require("./public/assignment/server/app.js")(app, db);
 
 console.log("Up");
-console.log(secretKey);
+console.log(process.env.SESSION_SECRET);
 
