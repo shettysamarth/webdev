@@ -4,9 +4,13 @@
         .module("FormBuilderApp")
         .controller("HomeController", HomeController);
 
-    function  HomeController($scope, $location) {
+    function  HomeController($scope, $location,UserService) {
+
         $scope.$location = $location;
-        console.log($location);
+        UserService.getCurrentUser()
+            .then(function(response) {
+                UserService.setCurrentUser(response.data);
+            });
     }
 })();
 

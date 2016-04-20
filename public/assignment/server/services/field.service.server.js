@@ -29,8 +29,8 @@ module.exports = function(app, model) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         model.deleteFieldByFieldAndFormId(formId, fieldId)
-            .then(function(res){
-                res.json(res);
+            .then(function(result){
+                res.json(result);
         });
     }
 
@@ -38,8 +38,9 @@ module.exports = function(app, model) {
         var formId = req.params.formId;
         var newField = req.body;
         model.createNewFieldForFormId(formId, newField)
-            .then(function(res){
-                res.json(res);
+            .then(function(result){
+                console.log("result being sent from server" + result)
+                res.json(result);
         });
     }
 
@@ -48,8 +49,8 @@ module.exports = function(app, model) {
         var fieldId = req.params.fieldId;
         var updatedField = req.body;
         model.updateFieldByFieldAndFormId(formId, fieldId, updatedField)
-            .then(function(res){
-                res.json(res);
+            .then(function(result){
+                res.json(result);
         });
     }
 
@@ -58,8 +59,8 @@ module.exports = function(app, model) {
         var formId = req.params.formId;
         var fields = req.body;
         model.updateAllFieldsOfFormId(formId,fields)
-            .then(function(res){
-                res.json(res);
+            .then(function(result){
+                res.json(result);
             });
     }
 };

@@ -8,18 +8,40 @@
     {
         console.log("ProfileController in place");
         console.log($rootScope.user);
-        $scope.update=update;
-        $scope.user.username= $rootScope.user.username;
-        $scope.user.password= $rootScope.user.password;
-        $scope.user.firstName= $rootScope.user.firstName;
-        $scope.user.lastName= $rootScope.user.lastName;
-        $scope.user.email = $rootScope.user.emails[0];
+        $scope.update = update;
+        function makeUserModel() {
+            var user = {
+                username: $rootScope.user.username,
+                password: $rootScope.user.password,
+                firstName: $rootScope.user.firstName,
+                lastName: $rootScope.user.lastName,
+                emails: $rootScope.user.emails.join(),
+                phones: $rootScope.user.phones.join()
+            }
+            console.log("makeUserModel" + user);
+            $scope.profileUser = user;
+        }
+
+        makeUserModel();
+
+
+        function makeServerModel(){
+            var user = {
+                username: $scope.profileUser.username,
+                password: $scope.profileUser.password,
+                firstName: $scope.profileUser.firstName,
+                lastName: $scope.profileUser.lastName,
+                emails: $scope.profileUser.emails.split(","),
+                phones: $scope.profileUser.phones.split(",")
+            }
+            console.log("makeServerModel" + user);
+            return user;
+        }
 
         function update(user)
         {
             console.log("update");
-            user.emails = [user.email];
-            UserService.updateUser($rootScope.user["_id"], user).then(updateCallback);
+            UserService.updateUser($rootScope.user["_id"], makeServerModel()).then(updateCallback);
         }
 
         function updateCallback(user)
@@ -27,7 +49,8 @@
             console.log(user);
             if(user)
             {
-                $rootScope.user = user;
+                $rootScope.user = user.data;
+                makeUserModel();
             }
         }
     }

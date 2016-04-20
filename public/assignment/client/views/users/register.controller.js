@@ -10,23 +10,26 @@
 
         function register(user) {
             console.log("registerClicked");
-            user.emails = [user.email];
-            UserService.createUser(user).then(serviceCallBack);
+            console.log(user);
+            var newUser = {
+                username: user.username,
+                password: user.password,
+                emails: user.emails.split(","),
+
+            }
+            UserService.register(newUser).then(serviceCallBack);
         }
 
         function serviceCallBack(user){
             if(user)
             {
-                console.log("ser" + user);
-                $rootScope.user = user;
+                console.log("serviceCallBack")
+                console.log(user);
+                $rootScope.user = user.data;
                 $scope.$location.path("/profile");
                 console.log("user Created :");
                 console.log(user);
             }
         }
     }
-
-
-
-
 })();

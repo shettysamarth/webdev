@@ -10,38 +10,59 @@ module.exports = function(app, model) {
 
     function createForm (req, res) {
         var newform = req.body;
-        res.json(model.createForm(newform));
+        model.createForm(newform)
+            .then (function (result){
+            res.json(result);
+        });
     }
 
     function findAllForms (req, res) {
-        res.json(model.findAllForms());
+        model.findAllForms()
+            .then (function (result){
+                res.json(result);
+            });
     }
 
     function findFormById (req, res) {
         var formId = req.params.formId;
-        res.json(model.findFormById(formId));
+        model.findFormById(formId)
+            .then (function (result){
+                res.json(result);
+            });
     }
 
     function updateForm (req, res) {
         var formId = req.params.formId;
         var updatedForm = req.body;
-        res.json(model.updateForm(formId, updatedForm));
+        model.updateForm(formId, updatedForm)
+            .then (function (result){
+                res.json(result);
+            });
     }
 
     function deleteFormById (req, res) {
         var formId = req.params.formId;
-        res.json(model.deleteForm(formId));
+        model.deleteForm(formId)
+            .then (function (result){
+                res.json(result);
+            });
     }
 
     function findAllFormsForUserId (req, res) {
         var userId = req.params.userId;
-        res.json(model.findAllFormsForUserId(userId));
+        model.findAllFormsForUserId(userId)
+            .then (function (result){
+                res.json(result);
+            });
     }
 
     function createFormForUserId (req, res) {
 
         var userId = req.params.userId;
         var newform = req.body;
-        res.json(model.createFormForUserId(userId, newform));
+        model.createFormForUserId(userId, newform)
+            .then (function (result){
+                res.json(result);
+            });
     }
 };

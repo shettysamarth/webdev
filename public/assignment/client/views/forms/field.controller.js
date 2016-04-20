@@ -44,8 +44,8 @@
         function getFields() {
             FieldService.findAllFieldsForFormId(formId).then(function(fields)
             {
-
-                model.fields = fields[0];
+                console.log(fields);
+                model.fields = fields;
             });
 
         }
@@ -113,9 +113,11 @@
                 }
             }
 
+
             FieldService
                 .createNewFieldForFormId(formId, newField)
                 .then(function(fields){
+                    //console.log(field);
                     model.fields = fields;
                 });
         }
