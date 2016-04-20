@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var cookieParser=require('cookie-parser');
 var session=require('express-session');
 
-var secretKey=process.env.SESSION_SECRET || "qwerty1234";
+var secretKey=process.env.SESSION_SECRET;
 app.use(session({resave: true,
     saveUninitialized: true,
     secret: secretKey}));
