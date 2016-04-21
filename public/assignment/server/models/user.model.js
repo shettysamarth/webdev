@@ -68,7 +68,7 @@ module.exports = function(mongoose) {
         console.log("User.model.js");
         console.log(userId);
         console.log(userObj);
-        var deffered = q.defer();
+        var deferred = q.defer();
         findUserById(userId)
             .then(function(user){
                 for (var property in userObj) {
@@ -78,17 +78,15 @@ module.exports = function(mongoose) {
                 console.log(user);
                 user.save(function(err, user){
                     if(user){
-                        deffered.resolve(user);
+                        deferred.resolve(user);
                     }
                     else{
-                        deffered.reject(err);
+                        deferred.reject(err);
                     }
 
                 });
             });
-
-        return deffered.promise;
-
+        return deferred.promise;
     }
 
 

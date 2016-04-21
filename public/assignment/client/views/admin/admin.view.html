@@ -8,54 +8,64 @@
             <div class="table-responsive ">
                 <table class="table table-striped bordered">
                     <tr>
-                        <th><span class="glyphicon glyphicon-triangle-bottom" ></span>Username</th>
-                        <th><span class="glyphicon glyphicon-triangle-bottom" ></span>Password</th>
-                        <th><span class="glyphicon glyphicon-triangle-bottom" ></span>Role</th>
-                        <th><span class="glyphicon glyphicon-triangle-bottom" ></span>Action</th>
+                        <th><button ng-click ="order('username')"  class="btn btn-default btn-block btn-left"> <span ng-show="predicate === 'username'" ng-class="decideIcon()" ></span>Username</button></th>
+                        <th class="text-center">Password</th>
+                        <th><button ng-click ="order('firstName')" class="btn btn-default btn-block btn-left"> <span ng-show="predicate === 'firstName'"  ng-class="decideIcon()" ></span>First Name</button></th>
+                        <th><button ng-click ="order('lastName')" class="btn btn-default btn-block btn-left"> <span  ng-show="predicate === 'lastName'" ng-class="decideIcon()" ></span>Last Name</button></th>
+                        <th class="text-center">Roles</button></th>
+                        <th class="text-center">Actions</button></th>
                     </tr>
 
                     <tr>
                         <td>
-                            <input type="text" class="form-control" id="inputUsername" placeholder="username">
+                            <input ng-model = "editingUser.username" type="text" class="form-control" id="inputUsername" placeholder="Username">
                         </td>
                         <td>
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="password">
+                            <input ng-model = "editingUser.password" type="password" class="form-control" id="inputPassword3" placeholder="password">
                         </td>
                         <td>
-                            <input type="text" class="form-control" id="inputRole" placeholder="role1, role2">
+                            <input ng-model = "editingUser.firstName" type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+                        </td>
+
+                        <td>
+                            <input ng-model = "editingUser.lastName" type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+                        </td>
+                        <td>
+                            <input ng-model = "editingUser.roles" type="text" class="form-control" id="inputRoles" placeholder="role1, role2">
                         </td>
 
                         <td>
                             <div class="btn-toolbar">
-                                <button type="button" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" ng-click = "addUser()">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
 
-                                <button type="button" class="btn btn-success">
+                                <button ng-click = "updateUser()"type="button" class="btn btn-success">
                                     <span class="glyphicon glyphicon-ok"></span>
                                 </button>
                             </div>
                         </td>
                     </tr>
 
-                    <tr>
-                        <td>alice</td>
+
+                    <tr ng-repeat="user in users | orderBy:predicate:reverse">
+                        <td>{{user.username}}</td>
                         <td></td>
-                        <td>student</td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
+                        <td>{{user.roles.join(",")}}</td>
                         <td>
                             <div class="btn-toolbar">
-                                <button type="button" class="btn btn-danger">
+                                <button type="button" class="btn btn-danger" ng-click = "deleteUser(user)">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>
 
-                                <button type="button" class="btn btn-info">
-                                    <span class="glyphicon glyphicon-pencil"></span>
+                                <button type="button" ng-click = "editUser(user)" class="btn btn-info">
+                                    <span class="glyphicon glyphicon-pencil"  ></span>
                                 </button>
                             </div>
                         </td>
                     </tr>
-
-
                 </table>
             </div>
         </div>

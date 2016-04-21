@@ -6,7 +6,6 @@
 
     function  SidebarController($scope, $location, $rootScope) {
         $scope.$location = $location;
-        console.log($rootScope.user);
 
         if(typeof $rootScope.user != 'undefined'){
             $scope.currentUser = $rootScope.user;

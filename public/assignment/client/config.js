@@ -80,13 +80,10 @@
         $http.get('/api/assignment/user/loggedin').success(function(user)
         {
             $rootScope.errorMessage = null;
-            // User is Authenticated
-            console.log("user:");
-            console.log(user);
+
             if (user !== '0' && user.roles.indexOf('admin') != -1)
             {
                 $rootScope.currentUser = user;
-                console.log("resolved");
                 deferred.resolve();
             }
         });
