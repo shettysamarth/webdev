@@ -5,12 +5,7 @@ var mongoose = require('mongoose');
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var  url = process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost/formMaker';
 var multer=require('multer');
-var passport      = require('passport');
-
-
-
-
-
+var passport = require('passport');
 if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
     url = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
         process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
@@ -40,7 +35,7 @@ app.use(express.static(__dirname + '/public/assignment/client'));
 
 app.listen(port, ipaddress);
 
-require("./public/assignment/server/app.js")(app, db);
+require("./public/assignment/server/app.js")(app, mongoose);
 
 console.log("Up");
 console.log(process.env.SESSION_SECRET);

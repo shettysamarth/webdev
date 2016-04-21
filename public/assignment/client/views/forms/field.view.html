@@ -6,15 +6,15 @@
                 <li role="presentation"><a href="#/forms">Forms</a></li>
                 <li role="presentation"class="active"><a href="#/fields">Fields</a></li>
             </ul>
-                <ul ui-sortable = "sortableFields" ng-model="model.fields" >
+            <ul ui-sortable = "sortableFields"class="list-group" ng-model="model.fields" >
 
-                <li  ng-repeat="field in model.fields">
+                <li   class="list-group-item" ng-repeat="field in model.fields">
                     <div class="row">
 
 
-                    <div class="col-sm-6 col-md-6 form-group" ng-switch on="field.type">
+                    <div class= "col-sm-9" ng-switch on="field.type">
                         <!-- For text and date fields-->
-                        <div ng-switch-default>
+                        <div  ng-switch-default>
 
                             <label for="{{field._id}}">{{field.label}}</label>
                             <input type="{{field.type}}" class="form-control"
@@ -25,7 +25,7 @@
                         <div ng-switch-when="TEXTAREA">
 
                             <label for="{{field._id}}">{{field.label}}</label>
-                <textarea class="form-control"
+                <textarea class=" list-group-item form-control"
                           placeholder="{{field.placeholder}}"
                           id="{{field._id}}" rows="3"/>
 
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="action-column col-sm-3">
+                    <div class="action-column btn-toolbar col-sm-3">
                         <span class="glyphicon glyphicon-pencil hover btn btn-info  btn1 pull-right" ng-click="model.editField($index)"></span>
                         <span class="glyphicon glyphicon-remove hover btn btn-danger  btn1 pull-right" ng-click="model.deleteField($index)"></span>
                         <span class="glyphicon glyphicon-align-justify hover btn btn-primary  btn1 pull-right"></span>
@@ -76,8 +76,8 @@
             </ul>
 
             <form>
-                <div class="row action-column">
-                    <div class="form-group col-sm-6">
+                <div class="row form-group">
+                    <div class="col-sm-6">
 
                         <label>Add new field:</label>
 
@@ -88,8 +88,8 @@
                             <option value="{{option.value}}">{{option.name}}</option>
                         </select>
                     </div>
-                    <div class="col-sm-3">
-                        <span class="glyphicon glyphicon-plus hover btn btn-success btn1 pull-right" ng-click="model.createNewField()"></span>
+                    <div class="col-sm-3 btn-toolbar">
+                        <span class="glyphicon glyphicon-plus hover btn btn-success btn1" ng-click="model.createNewField()"></span>
                     </div>
                 </div>
             </form>

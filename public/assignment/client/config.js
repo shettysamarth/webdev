@@ -85,8 +85,6 @@
             console.log(user);
             if (user !== '0' && user.roles.indexOf('admin') != -1)
             {
-                user.emails=user.emails.join(",");
-                user.phones=user.phones.join(",");
                 $rootScope.currentUser = user;
                 console.log("resolved");
                 deferred.resolve();
@@ -116,7 +114,7 @@
             {
                 $rootScope.errorMessage = 'You need to log in.';
                 deferred.reject();
-                $location.url('/login');
+                $location.path('/login');
             }
         });
 
@@ -126,20 +124,16 @@
     var checkCurrentUser = function($q, $timeout, $http, $location, $rootScope)
     {
         var deferred = $q.defer();
-
         $http.get('/api/assignment/user/loggedin').success(function(user)
         {
             $rootScope.errorMessage = null;
             // User is Authenticated
             if (user !== '0')
             {
-                user.emails=user.emails.join(",");
-                user.phones=user.phones.join(",");
                 $rootScope.currentUser = user;
             }
             deferred.resolve();
         });
-
         return deferred.promise;
     };
 

@@ -11,7 +11,7 @@
 
         function login(user)
         {
-            UserService.login(user).then(loginCallback);
+            UserService.login(user).then(loginCallback, loginErrorCallback);
         }
 
         function  loginCallback(response)
@@ -22,10 +22,19 @@
             }
             else {
                 $scope.errorMessage="Invalid Username/Password!!";
-                $timeout(function(){
-                    $scope.errorMessage=false;
-                },2000);
+                //$timeout(function(){
+                //    $scope.errorMessage=false;
+                //    //BootstrapDialog.show({
+                //    //    message: 'Hi Apple!'
+                //    //});
+                //},2000);
             }
+        }
+
+        function loginErrorCallback(err){
+            $scope.errorMessage="Invalid Username/Password!!";
+
+
         }
     }
 

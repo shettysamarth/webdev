@@ -1,5 +1,6 @@
 "use strict";
 var q = require ("q");
+
 module.exports = function(mongoose) {
 
     var userSchema = require("./user.schema.server.js")(mongoose);
@@ -21,8 +22,30 @@ module.exports = function(mongoose) {
     }
 
     function findUserByCredentials(credentials) {
-        return userModel.findOne({username: credentials.username,
-            password: credentials.password});
+        var qi = q.defer();
+        console.log("findUserByCredentials credentials : ")
+        console.log(credentials);
+        findUserByUsername(credentials.username)
+            .then(function(user){
+                console.log(user);
+                user.comparePassword(credentials.password, function(err, isMatch){
+                       if(err){
+                           qi.reject(err);
+                       }
+                        else if (isMatch){
+                           qi.resolve(user);
+                       }
+                        else{
+                           console.log("Match Failed");
+                           qi.reject(err);
+                       }
+                    });
+            },
+            function(err){
+                qi.reject(err);
+            });
+        return qi.promise;
+
     }
 
     function findUserByUsername(username) {
@@ -42,7 +65,31 @@ module.exports = function(mongoose) {
     }
 
     function updateUser(userId, userObj) {
-        return userModel.update({_id: userId}, {$set: userObj});
+        console.log("User.model.js");
+        console.log(userId);
+        console.log(userObj);
+        var deffered = q.defer();
+        findUserById(userId)
+            .then(function(user){
+                for (var property in userObj) {
+                    console.log(property);
+                    user[property] = userObj[property];
+                }
+                console.log(user);
+                user.save(function(err, user){
+                    if(user){
+                        deffered.resolve(user);
+                    }
+                    else{
+                        deffered.reject(err);
+                    }
+
+                });
+            });
+
+        return deffered.promise;
 
     }
+
+
 };

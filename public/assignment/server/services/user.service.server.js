@@ -25,11 +25,17 @@ module.exports=function(app,userModel){
             .findUserByCredentials({username: username, password: password})
             .then(
                 function(user) {
-                    if (!user) { return done(null, false); }
+                    if (!user) {
+                        return done(null, false);
+                    }
                     return done(null, user);
                 },
                 function(err) {
-                    if (err) { return done(err); }
+                    console.log( "err" + err);
+                    if (err) {
+                        return done(err);
+                    }
+                    return done(null, false);
                 }
             );
     }
@@ -126,25 +132,14 @@ module.exports=function(app,userModel){
             .updateUser(req.params.id, newUser)
             .then(
                 function(user){
-                    console.log(user);
-                    //res.json(user);
+                    //console.log(user);
+                    res.json(user);
                 },
                 function(err){
                     res.status(400).send(err);
                 }
-            ).
-            then(
-            function(){
-                userModel.findUserById(req.params.id)
-                    .then(
-                        function(user){
-                            res.json(user);
-                            console.log(user);
-                        },
-                        function(err){
-                            res.status(400).send(err);
-                        })
-            });
+            );
+
     }
 
     function deleteUserByID(req,res) {
