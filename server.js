@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(__dirname + '/public/assignment/client'));
+app.use(express.static(__dirname + '/public/'));
 
 app.listen(port, ipaddress);
 
